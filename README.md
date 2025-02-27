@@ -133,3 +133,27 @@ Contributor graph is generated using [contrib.rocks](https://contrib.rocks/previ
 ## License
 
 This project is under the [GNU GPLv3](LICENSE).
+
+## build
+docker build -t tool-mix ./
+### 打包部署到Linux的镜像需要指定系统架构，否则在linux上无法运行（mac采用的是arm架构，云服务器采用的是amd架构）
+docker build -t tool-mix:1.0 ./ --platform linux/amd64
+
+## docker push ali
+1. 登录阿里云Docker Registry
+   $ docker login --username=陈嘉炜chen crpi-xg6bsafj91h9jgtc.cn-shanghai.personal.cr.aliyuncs.com
+   用于登录的用户名为阿里云账号全名，密码为开通服务时设置的密码。
+2. 从Registry中拉取镜像
+   $ docker pull crpi-xg6bsafj91h9jgtc.cn-shanghai.personal.cr.aliyuncs.com/cjw-web-ns/tool-mix:1.0
+3. 将镜像推送到Registry
+   $ docker login --username=陈嘉炜chen crpi-xg6bsafj91h9jgtc.cn-shanghai.personal.cr.aliyuncs.com
+   $ docker tag 655c103129a8 crpi-xg6bsafj91h9jgtc.cn-shanghai.personal.cr.aliyuncs.com/cjw-web-ns/tool-mix:2.0
+   $ docker push crpi-xg6bsafj91h9jgtc.cn-shanghai.personal.cr.aliyuncs.com/cjw-web-ns/tool-mix:2.0
+
+## docker 命令
+docker ps -a
+docker stop 容器名
+docker rm 容器ID
+docker rm -f 容器ID  #强制删除
+docker rmi  镜像名/镜像ID
+docker run -t -p 8080:80 镜像ID

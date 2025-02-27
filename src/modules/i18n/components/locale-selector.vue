@@ -2,6 +2,7 @@
 const { availableLocales, locale } = useI18n();
 
 const localesLong: Record<string, string> = {
+  zh: '中文',
   en: 'English',
   de: 'Deutsch',
   es: 'Español',
@@ -10,12 +11,11 @@ const localesLong: Record<string, string> = {
   pt: 'Português',
   ru: 'Русский',
   uk: 'Українська',
-  zh: '中文',
   vi: 'Tiếng Việt',
 };
 
 const localeOptions = computed(() =>
-  availableLocales.map(locale => ({
+  availableLocales.reverse().map(locale => ({
     label: localesLong[locale] ?? locale,
     value: locale,
   })),
